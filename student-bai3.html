@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="vi"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Listening 12 – Bài 3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@500;700;800&display=swap&subset=vietnamese" rel="stylesheet">
+<style>
+:root{--bg1:#dfe6ff;--bg2:#f4f0ff;--card:#ffffff;--tx:#1d2150;--mut:#5d6396;--ink:#1d2150;
+--blue:#3d5cff;--blueD:#2339c9;--sun:#ffc83d;--sunD:#d99a00;--ok:#1fb673;--okD:#12835a;--bad:#ff5d6c;
+--line:#c9d0f5;--sel:#eaf0ff;--r:18px;--disp:"Baloo 2","Nunito",system-ui,sans-serif;--body:"Nunito",system-ui,-apple-system,"Segoe UI",sans-serif}
+@media (prefers-color-scheme:dark){:root{--bg1:#12143a;--bg2:#1a1650;--card:#262a63;--tx:#eef0ff;--mut:#aab0e6;--ink:#0b0d2a;--line:#3b4190;--sel:#33398a;--blue:#6f86ff;--blueD:#3a4fd6}}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;color:var(--tx);font:600 16px/1.5 var(--body);background:linear-gradient(160deg,var(--bg1),var(--bg2)) fixed}
+.hide{display:none!important}
+#top{position:sticky;top:0;z-index:5;padding:10px 14px;background:color-mix(in srgb,var(--bg1) 85%,transparent);backdrop-filter:blur(8px)}
+.tin{max-width:720px;margin:0 auto;display:flex;align-items:center;gap:12px;font-weight:800}
+.track{flex:1;height:16px;border-radius:99px;background:var(--line);box-shadow:inset 0 3px 0 rgba(0,0,0,.12);overflow:hidden}
+#fill{height:100%;width:0;border-radius:99px;background:linear-gradient(var(--sun),#ffb300);box-shadow:inset 0 -4px 0 var(--sunD);transition:width .35s cubic-bezier(.3,1.4,.5,1)}
+main{max-width:720px;margin:0 auto;padding:14px 14px 56px}
+h1{font:800 28px/1.1 var(--disp);margin:8px 0 14px;letter-spacing:.2px}
+h2{font:800 21px/1.2 var(--disp);margin:0 0 14px;display:flex;align-items:center;gap:10px}
+.mut{color:var(--mut)}.who{margin:0 0 4px;color:var(--mut)}
+.card{background:var(--card);border-radius:var(--r);padding:20px 18px;margin:18px 0;border:3px solid var(--ink);box-shadow:0 8px 0 var(--ink),0 18px 28px rgba(29,33,80,.18)}
+.num{display:grid;place-items:center;width:38px;height:38px;border-radius:12px;background:var(--blue);color:#fff;box-shadow:0 4px 0 var(--blueD);font:800 20px var(--disp)}
+.hero{text-align:center;padding-top:26px}
+.hero .hp{display:flex;justify-content:center;align-items:flex-end;gap:6px;height:48px;margin-bottom:10px}
+.hp i,.eq i{display:block;width:8px;border-radius:4px;background:var(--blue);height:30%}
+.hp i{animation:bob 1.1s ease-in-out infinite}.hp i:nth-child(2){animation-delay:.15s}.hp i:nth-child(3){animation-delay:.3s}.hp i:nth-child(4){animation-delay:.45s}.hp i:nth-child(5){animation-delay:.6s}
+@keyframes bob{50%{height:100%}}
+input[type=text]{display:block;width:100%;max-width:340px;margin:16px auto;padding:13px 16px;font:700 17px var(--body);color:var(--tx);background:var(--sel);border:3px solid var(--ink);border-radius:14px;box-shadow:inset 0 4px 0 rgba(0,0,0,.1)}
+input[type=text]:focus{outline:3px solid var(--sun);outline-offset:2px}
+.key{font:800 17px var(--disp);cursor:pointer;color:#fff;background:var(--blue);border:3px solid var(--ink);border-radius:14px;padding:11px 22px;box-shadow:0 6px 0 var(--ink);transition:transform .08s,box-shadow .08s}
+.key:hover{filter:brightness(1.06)}.key:active:not(:disabled){transform:translateY(5px);box-shadow:0 1px 0 var(--ink)}
+.key:disabled{opacity:.55;cursor:not-allowed}.key.big{font-size:20px;padding:13px 30px}.go2{background:var(--ok)}
+.err{color:var(--bad);font-weight:800;margin:10px 0 0}
+.play{display:flex;align-items:center;gap:14px;width:100%;margin:0 0 8px;padding:12px 14px;text-align:left;font:inherit;color:var(--ink);cursor:pointer;background:var(--sun);border:3px solid var(--ink);border-radius:20px;box-shadow:0 6px 0 var(--ink);transition:transform .08s,box-shadow .08s}
+.play:active:not(:disabled){transform:translateY(5px);box-shadow:0 1px 0 var(--ink)}
+.play:disabled{background:#d8d8e6;cursor:not-allowed}
+.disc{position:relative;flex:none;display:grid;place-items:center;width:56px;height:56px;border-radius:50%;background:#fff;border:3px solid var(--ink);box-shadow:inset 0 -5px 0 rgba(0,0,0,.14)}
+.eq{position:absolute;inset:0;display:none;justify-content:center;align-items:center;gap:3px}
+.eq i{width:5px;background:var(--ink)}
+.play.on .eq{display:flex;background:#fff;border-radius:50%}.play.on svg{display:none}
+.play.on .eq i{animation:bob .7s ease-in-out infinite}.eq i:nth-child(2){animation-delay:.12s}.eq i:nth-child(3){animation-delay:.24s}.eq i:nth-child(4){animation-delay:.36s}
+.pt b{display:block;font:800 19px/1.1 var(--disp)}.pt small{font:700 14px var(--body)}
+fieldset.q{border:0;margin:18px 0 0;padding:0;min-width:0}
+legend{padding:0;margin-bottom:8px;font-weight:800;display:flex;gap:10px;align-items:flex-start}
+.qn{flex:none;display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--ink);color:#fff;font:800 14px var(--disp);margin-top:1px}
+.opts{display:grid;gap:10px}.opts.two{grid-template-columns:1fr 1fr}.opts.three{grid-template-columns:repeat(3,1fr)}.opts.three label.o{justify-content:center}
+.pic{display:block;width:100%;height:auto;margin:6px 0 4px;background:#fff;border:3px solid var(--ink);border-radius:12px}
+.cap{display:grid;grid-template-columns:repeat(3,1fr);margin:0 0 8px;text-align:center;font:800 16px var(--disp)}
+.ins{margin:-6px 0 12px;color:var(--mut);font-weight:700}
+.prow{display:flex;gap:10px;align-items:stretch;margin:0 0 8px}
+.prow .play{flex:1;width:auto;margin:0;min-width:0}
+.stopb{flex:none;margin:0;padding:8px 14px;background:var(--bad);font-size:16px}
+.stopb:disabled{background:#d8d8e6;color:#8b8fb5;box-shadow:0 6px 0 #a9adcf;border-color:#a9adcf}
+input.fill{max-width:none;margin:8px 0 0;font-size:16px}
+label.o{position:relative;display:flex;align-items:center;gap:10px;padding:10px 12px;cursor:pointer;background:var(--card);border:3px solid var(--ink);border-radius:14px;box-shadow:0 5px 0 var(--ink);transition:transform .08s,box-shadow .08s,background .12s}
+label.o input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.ky{flex:none;display:grid;place-items:center;width:30px;height:30px;border-radius:9px;background:var(--sel);border:2px solid var(--ink);font:800 15px var(--disp)}
+label.o:hover{background:var(--sel)}
+label.o:has(input:checked){transform:translateY(4px);box-shadow:0 1px 0 var(--ink);background:var(--blue);color:#fff}
+label.o:has(input:checked) .ky{background:var(--sun);color:var(--ink)}
+label.o:has(input:focus-visible){outline:3px solid var(--sun);outline-offset:3px}
+.sub{text-align:center;margin-top:26px}.sub .err{display:block}
+.res .score{display:inline-flex;align-items:baseline;justify-content:center;padding:8px 28px;margin:0 0 12px;background:var(--sun);color:var(--ink);border:3px solid var(--ink);border-radius:24px;box-shadow:0 7px 0 var(--ink);font-family:var(--disp)}
+.score b{font-size:68px;line-height:1}.score span{font-size:28px;font-weight:800}
+.rl{display:flex;justify-content:space-between;gap:12px;max-width:380px;margin:8px auto 0;padding:10px 14px;background:var(--sel);border-radius:12px;border:2px solid var(--ink)}
+@media (max-width:480px){.opts.two{grid-template-columns:1fr 1fr}h1{font-size:24px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div id="top" class="hide"><div class="tin"><span>Tiến độ</span><div class="track"><div id="fill"></div></div><span id="pc">0/4 câu</span></div></div>
+<main><h1>Listening 12 – Bài 3</h1><div id="app"></div></main>
+<script>
+// ====== CẤU HÌNH: dán địa chỉ Firebase Realtime Database của bạn (không có dấu / ở cuối) ======
+const DB_URL = "https://nghe12unit4-default-rtdb.asia-southeast1.firebasedatabase.app";
+// Mã lớp: đổi mỗi tiết để dữ liệu các lớp không lẫn nhau (phải trùng với teacher.html)
+const CLASS_ID = "lop12a1_bai3";
+const MAXPLAY = 2;
+// ======================================================================================
+// Chuẩn hóa câu trả lời điền: bỏ hoa/thường, dấu câu, dấu ', "%" = "percent", "thirty" = 30
+const norm=s=>String(s).toLowerCase().replace(/[’‘`']/g,"").replace(/&/g," and ").replace(/%/g," percent ").replace(/per\s*cent/g," percent ").replace(/\bthirty\b/g,"30").replace(/[^a-z0-9 ]/g," ").replace(/\s+/g," ").trim();
+const EX=[
+ {id:"e2",no:3,title:"Bài 3: Urbanisation (điền đáp án)",audio:"bai3.mp3",
+  ins:"Listen to the talk again and answer the questions. Use no more than THREE words and/or a number.",
+  // fill = các đáp án được chấm đúng (khi so sánh đã tự bỏ hoa/thường và dấu câu)
+  qs:[{q:"What was the percentage of the world's urban population in 1950?",fill:["about 30 percent","30 percent","thirty percent"]},
+      {q:"By which year is it expected that about 70% of the world's population will live in cities?",fill:["2050","by 2050"]},
+      {q:"What are good schools and modern hospitals examples of?",fill:["better facilities","citys better facilities","the citys better facilities"]},
+      {q:"Apart from housing, what is more expensive in cities?",fill:["goods and services","goods services"]}]}
+];
+const $=s=>document.querySelector(s), app=$("#app");
+const TOTAL=EX.reduce((s,e)=>s+e.qs.length,0);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const SV={".sv":"timestamp"};
+let id,name,plays={};
+try{id=localStorage.getItem("lq_id")}catch(e){}
+if(!id){id="s"+Date.now().toString(36)+Math.random().toString(36).slice(2,7);try{localStorage.setItem("lq_id",id)}catch(e){}}
+const url=()=>DB_URL+"/"+CLASS_ID+"/"+id+".json";
+const put=d=>fetch(url(),{method:"PUT",body:JSON.stringify(d)}).then(r=>{if(!r.ok)throw new Error(r.status);return r.json()});
+
+function start(){
+  bar(false);app.innerHTML='<section class="card hero"><div class="hp" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div><h2>Sẵn sàng nghe chưa?</h2><p class="mut">'+EX.length+' bài nghe, '+TOTAL+' câu. Mỗi bài nghe tối đa '+MAXPLAY+' lần. Đồng hồ chạy khi bạn bấm “Bắt đầu”.</p><input type="text" id="nm" placeholder="Họ và tên của bạn" maxlength="60" autocomplete="name"><button class="key big" id="go">Bắt đầu làm bài</button><p class="err" id="e" role="alert"></p></section>';
+  $("#go").onclick=async()=>{
+    name=$("#nm").value.trim();if(!name){$("#nm").focus();return}
+    try{await put({name,startedAt:SV,status:"doing"});quiz()}
+    catch(e){$("#e").textContent="Chưa kết nối được máy chủ. Nhờ thầy cô kiểm tra lại, rồi thử lại."}
+  };
+}
+const aud={},busy={};
+// Mỗi bài dùng đúng 1 đối tượng audio, nên không bao giờ có 2 luồng phát chồng nhau
+const el=i=>aud[i]||(aud[i]=new Audio(EX.find(e=>e.id===i).audio));
+function say(i){
+  if(busy[i]){stop(i);return}   // bấm lại nút vàng khi đang nghe = dừng / tiếp tục
+  if((plays[i]||0)>=MAXPLAY)return;
+  EX.forEach(o=>{if(o.id!==i&&busy[o.id]&&!el(o.id).paused)stop(o.id)});
+  plays[i]=(plays[i]||0)+1;
+  const b=$("#pl-"+i),sm=b.querySelector("small"),st=$("#st-"+i),left=MAXPLAY-plays[i];
+  const a=el(i);a.pause();try{a.currentTime=0}catch(e){}
+  busy[i]=true;b.classList.add("on");sm.textContent="Đang phát… còn "+left+" lượt";st.disabled=false;st.textContent="⏸ Dừng";
+  const end=()=>{busy[i]=false;st.disabled=true;st.textContent="⏸ Dừng";b.classList.remove("on")};
+  a.onended=()=>{end();sm.textContent=left?"Còn "+left+" lượt nghe":"Đã hết lượt nghe";b.disabled=left<=0};
+  const fail=()=>{end();plays[i]--;sm.textContent="Không tải được file nghe. Báo thầy cô nhé."};
+  a.onerror=fail;
+  const p=a.play();if(p&&p.catch)p.catch(err=>{if(err&&err.name==="AbortError")return;fail()});
+}
+// Dừng / tiếp tục nghe: không tốn thêm lượt nghe
+function stop(i){
+  if(!busy[i])return;
+  const a=el(i),b=$("#pl-"+i),sm=b.querySelector("small"),st=$("#st-"+i);
+  if(a.paused){const p=a.play();if(p&&p.catch)p.catch(()=>{});b.classList.add("on");st.textContent="⏸ Dừng";sm.textContent="Đang phát… còn "+(MAXPLAY-plays[i])+" lượt"}
+  else{a.pause();b.classList.remove("on");st.textContent="▶ Tiếp tục";sm.textContent="Đã dừng · bấm Tiếp tục để nghe tiếp (không mất lượt)"}
+}
+function qhtml(e,q,i){
+  const nm=e.id+"-"+i;let body;
+  if(q.fill)body='<input type="text" class="fill" name="'+nm+'" placeholder="Nhập đáp án…" maxlength="60" autocomplete="off" autocapitalize="none" spellcheck="false">';
+  else body='<div class="opts'+(q.letters?' three':'')+'">'+q.o.map((o,k)=>'<label class="o"><input type="radio" name="'+nm+'" value="'+k+'"><span class="ky">'+"ABCD"[k]+'</span>'+(q.letters?'':'<span>'+esc(o)+'</span>')+'</label>').join('')+'</div>';
+  return '<fieldset class="q"><legend><span class="qn">'+(i+1)+'</span>'+esc(q.q)+'</legend>'+(q.img?'<img class="pic" src="'+q.img+'" alt="Hình cho câu '+(i+1)+'">':'')+(q.cap?'<div class="cap" aria-hidden="true"><span>A</span><span>B</span><span>C</span></div>':'')+body+'</fieldset>';
+}
+function quiz(){
+  bar(true);
+  app.innerHTML='<p class="who">Học sinh: <b>'+esc(name)+'</b></p>'+EX.map(e=>
+   '<section class="card"><h2><span class="num">'+e.no+'</span>'+esc(e.title.replace(/^Bài \d: /,""))+'</h2><p class="ins">'+esc(e.ins)+'</p>'+
+   '<div class="prow"><button class="play" id="pl-'+e.id+'"><span class="disc"><svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg><span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span></span><span class="pt"><b>Nghe bài</b><small>Còn '+MAXPLAY+' lượt nghe</small></span></button><button class="key stopb" id="st-'+e.id+'" disabled>⏸ Dừng</button></div>'+
+   e.qs.map((q,i)=>qhtml(e,q,i)).join('')+'</section>').join('')+
+   '<div class="sub"><button class="key big go2" id="sb">Nộp bài</button><span class="err" id="m" role="alert"></span></div>';
+  EX.forEach(e=>{$("#pl-"+e.id).onclick=()=>say(e.id);$("#st-"+e.id).onclick=()=>stop(e.id)});
+  $("#sb").onclick=submit;
+  app.addEventListener("change",prog);app.addEventListener("input",prog);prog();
+}
+function bar(show){$("#top").classList.toggle("hide",!show)}
+let warned=false;
+function prog(){
+  warned=false;const mm=$("#m");if(mm)mm.textContent="";
+  const n=document.querySelectorAll("input[type=radio]:checked").length+[...document.querySelectorAll("input.fill")].filter(x=>x.value.trim()).length;
+  $("#fill").style.width=(n/TOTAL*100)+"%";$("#pc").textContent=n+"/"+TOTAL+" câu";
+}
+async function submit(){
+  const answers={},scores=[];let total=0,miss=0;
+  EX.forEach(e=>{let s=0;e.qs.forEach((q,i)=>{
+    let ok,v;
+    if(q.fill){const t=document.querySelector('input[name="'+e.id+'-'+i+'"]').value.trim();
+      if(!t)miss++;v=t||"(bỏ trống)";ok=!!t&&q.fill.map(norm).includes(norm(t));}
+    else{const c=document.querySelector('input[name="'+e.id+'-'+i+'"]:checked'),x=c?+c.value:-1;
+      if(x<0)miss++;v=x>=0?q.o[x]:"(bỏ trống)";ok=x===q.a;}
+    if(ok)s++;answers[e.id+"_"+(i+1)]={v,ok};});scores.push(s);total+=s});
+  // Không dùng confirm(): trình duyệt chặn hộp thoại khi trang được nhúng trong Google Sites
+  if(miss&&!warned){warned=true;$("#m").textContent="Còn "+miss+" câu chưa trả lời. Bấm Nộp bài lần nữa nếu vẫn muốn nộp.";return}
+  Object.values(aud).forEach(a=>a.pause());
+  $("#sb").disabled=true;
+  try{
+    const cur=await (await fetch(url())).json();
+    await put({name,startedAt:(cur&&cur.startedAt)||SV,submittedAt:SV,status:"done",answers,scores,total});
+    bar(false);app.innerHTML='<section class="card hero res"><div class="score"><b>'+total+'</b><span>/'+TOTAL+'</span></div><h2>Đã nộp bài, '+esc(name)+'!</h2>'+EX.map((e,i)=>'<p class="rl"><span>'+esc(e.title)+'</span><b>'+scores[i]+'/'+e.qs.length+'</b></p>').join('')+'</section>';
+  }catch(e){$("#sb").disabled=false;$("#m").textContent=(String(e.message)==="401"||String(e.message)==="403"?"Máy chủ từ chối lưu bài (lỗi "+e.message+"). Báo thầy cô kiểm tra Rules của Firebase.":"Chưa gửi được bài ("+e.message+"). Kiểm tra mạng rồi bấm Nộp bài lại.")}
+}
+start();
+</script></body></html>
